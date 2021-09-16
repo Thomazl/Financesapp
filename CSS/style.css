@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;1,100;1,200;1,300;1,400;1,500&display=swap');
+:root{
+    --color-dark-blue: #363F5F;
+    --color-white: #fff; 
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: #f0f2f5;
+    font-family: 'Poppins', sans-serif;
+}
+/* Tittles */
+h2{
+    margin-top:3.2rem;
+    margin-bottom: 0.8rem;
+    color: var(--color-dark-blue);
+    font-weight: 400;
+}
+/* Header */
+header{
+    background: #2D4A22;
+    padding: 2rem 0 10rem;
+    text-align: center;
+}
+
+#logo{
+    color: var(--color-white);
+    font-weight: 100;
+}
+
+/* Main */
+.container{
+    width: min(90vw, 800px);
+    margin: 0 auto;
+}
+
+/* Balance */
+#balance{
+    margin-top: -4rem; 
+}
+
+#balance h2{
+    color: var(--color-white);
+    margin-top: 0;
+}
+/* Cards */
+.card{
+    background: #fff;
+    padding: 1.5rem 2rem; 
+    border-radius: 0.25rem;
+    margin-bottom: 2rem;
+    color: var(--color-dark-blue);
+}
+
+.card h2{
+    font-weight: normal;
+    font-size: 1rem;
+}
+.card p{
+    font-size: 2rem;
+    line-height: 3rem;
+    margin-top: 1rem;
+}
+
+.card.total{
+    background: #49AA26;
+    color:var(--color-white);
+}
+/* Footer */
+footer{
+    text-align: center;
+}
