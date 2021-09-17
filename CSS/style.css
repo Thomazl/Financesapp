@@ -8,7 +8,8 @@
     --color-dark-green: #2D4A22;
     --color-green-aprove: #12a454;
     --color-red-desaproved: #e92929; 
-
+    --color-green-button-hover: #3dd705;
+    --background-modal: rgba(0, 0, 0, .7);
 }
 
 *{
@@ -17,6 +18,9 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 93.75%
+}
 body{
     background: var(--color-white-grey);
     font-family: 'Poppins', sans-serif;
@@ -28,6 +32,18 @@ h2{
     color: var(--color-dark-blue);
     font-weight: 400;
 }
+/*Keep visible to SEO, but make invisible to every*/
+.sr-only{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
 /* Header */
 header{
     background: var(--color-dark-green);
@@ -35,10 +51,6 @@ header{
     text-align: center;
 }
 
-#logo{
-    color: var(--color-white);
-    font-weight: 100;
-}
 
 /* Main */
 .container{
@@ -67,6 +79,9 @@ header{
 .card h3{
     font-weight: normal;
     font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .card p{
     font-size: 2rem;
@@ -78,16 +93,64 @@ header{
     background: var(--color-green);
     color:var(--color-white);
 }
+/* Links & Buttons */
+.button{
+    text-decoration: none;
+    color: var(--color-green);
+}
+.button:hover{
+    color: var(--color-green-button-hover);
+}
+.button.new{
+    display: inline-block;
+    margin-bottom: 0.8rem;
+}
 
+button{
+    width: 100%;
+    height: 50px;
+    border: none;
+    color: var(--color-white);
+    background: var(--color-green);
+    border-radius: .25rem;
+    cursor: pointer;
+}
+button:hover{
+    background: var(--color-green-button-hover);
+}
+
+.button.cancel{
+    color: var(--color-red-desaproved);
+    border: 2px var(--color-red-desaproved) solid;
+    border-radius: .25rem;
+    height: 50px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: .6;
+}
+.button.cancel:hover{
+    opacity: 1;
+}
 /* Table */
+#transaction{
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
 #data-table{
-     width: 100%;
+    width: 100%;
     border-spacing: 0 0.5rem;
     color: var(--color-grey);
 }
 table thead tr th:first-child,
 table tbody tr td:first-child{
     border-radius: 0.25rem 0 0 0.25rem;
+}
+table thead tr th:last-child,
+table tbody tr td:last-child{
+    border-radius: 0 0.25rem 0.25rem 0;
 }
 table th{
     background: var(--color-white);
@@ -115,10 +178,80 @@ table tbody tr:hover{
 .expense{
     color: var(--color-red-desaproved);
 }
+/* Modal */
+.modal-overlay{
+    width: 100%;
+    height: 100%;
+    background: var(--background-modal);
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+}
+.modal-overlay.active{
+    opacity: 1;
+    visibility: visible;
+}
+.modal{
+    background: var(--color-white-grey);
+    padding: 2.4rem;
+   max-width: 500px;
+   width: 90%;
+
+}
+/* Modal Form */
+#form{
+    max-width: 500px;
+}
+#form h2{
+    margin-top:0
+}
+
+input{
+    border: none;
+    border-radius:.2rem;
+    padding: .8rem;
+    width: 100%;
+}
+
+.input-group{
+    margin-top: .8rem;
+}
+
+.input-group small{
+    opacity: .4;
+}
+
+.input-group.actions{
+    display: flex;
+    justify-content: space-between;
+     align-items: center;
+}
+
+.input-group.actions .button,
+.input-group.actions button{
+    width:48%;
+}
 /* Footer */
 footer{
     text-align: center;
     padding: 4rem 0 2rem;
     color: var(--color-dark-blue);
     opacity: 0.6;
+}
+
+/* Responsive */
+@media (min-width: 800px){
+    html{
+        font-size: 87.5%
+    }
+
+    #balance{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
 }
