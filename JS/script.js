@@ -37,14 +37,33 @@ const Modal = {
 },] 
 
 const transaction = {
+    all: transactions,
+    add(transaction){
+        transaction.all.push(transaction)
+    },
     incomes(){
         //somar as entradas
+        let income = 0;
+        transaction.all.forEach(transaction => {
+            if (transaction.amount > 0){
+                income += transaction.amount;
+            }
+        })
+        return income
     },
     expenses(){
         //somar as saidas
+        let expense = 0;
+        transaction.all.forEach(transaction => {
+            if (transaction.amount < 0) {
+                expense += transaction.amount;
+            }
+        })
+        return expense
     },
     total(){
-
+        //Total do valor
+        return transaction.incomes() + transaction.expenses();
     }
 }
 
@@ -66,9 +85,16 @@ const DOM = {
             <td class="date">${transaction.date}</td>
             <td><img src="./assets/minus.svg" alt="Remover alteração" /></td>`
         return html
+    },
+
+    updateBalance(){
+        document.querySelector('p#incomeDisplay').innerHTML = Utils.formatCurrency(transaction.incomes())
+        document.querySelector('p#expenseDisplay').innerHTML = Utils.formatCurrency(transaction.expenses())
+        document.querySelector('p#totalDisplay').innerHTML = Utils.formatCurrency(transaction.total())
     }
 }
 
+//Format the value in to the currency representation
 const Utils = {
     formatCurrency(value){
        const signal = Number(value) < 0 ? "-" : ""
@@ -88,3 +114,4 @@ const Utils = {
 transactions.forEach(function (transaction) {
     DOM.addTransaction(transaction)
 })
+  DOM.updateBalance()
