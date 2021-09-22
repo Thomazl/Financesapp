@@ -36,7 +36,7 @@ const Modal = {
     description: 'App',
     amount: 2000000,
     date:'23/01/2021'
-},] 
+}] 
 
 const transaction = {
     all: transactions,
