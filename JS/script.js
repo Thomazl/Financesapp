@@ -1,12 +1,14 @@
 const Modal = {
     open(){
         //add the class active in the modal to show the modal content
-        document.querySelector('div.modal-overlay').classList.toggle('active')
-        // console.logs('Open')
+        document.querySelector('div.modal-overlay').classList.toggle('active');
+        document.querySelector('div.modal').classList.add('slide-in-elliptic-left-fwd');
+        //console.log('Open')
     },
      close(){
-    //     //remove the class active in hte modal to desactive modal content
-        document.querySelector('div.modal-overlay').classList.toggle('active')
+        //remove the class active in hte modal to desactive modal content
+        document.querySelector('div.modal-overlay').classList.toggle('active');
+        document.querySelector('div.modal').classList.remove('slide-in-elliptic-left-fwd');
         // console.log('Close')
     }   
 }
