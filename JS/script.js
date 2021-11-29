@@ -28,9 +28,27 @@ const Transaction = {
         App.reload()
     },
     remove(index){
-        Transaction.all.splice(index, 1);
+        swal({
+            title: "Tem certeza?",
+            text: "Você não poderá reverter isso!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        //Checa se o usuário confirmou a exclusão
+        .then((willDelete) => {
+            if(willDelete){
+                Transaction.all.splice(index, 1);
+            App.reload()
+            swal("Excluído!", {
+                icon: "success"
+            })
+            }else{
+                swal("Operação cancelada!")
+            }
+            
+        })
 
-        App.reload()
     },
 
     incomes(){
