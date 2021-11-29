@@ -74,10 +74,12 @@ const DOM = {
     transactionsContainer: document.querySelector('#data-table tbody'),
     addTransaction(transaction, index) {
         const tr = document.createElement('tr')
-        tr.innerHTML = DOM.innerHTMLtransaction(transaction)
+        tr.innerHTML = DOM.innerHTMLtransaction(transaction, index)
+        tr.dataset.index = index
+
         DOM.transactionsContainer.appendChild(tr)
     },
-    innerHTMLtransaction(transaction){
+    innerHTMLtransaction(transaction, index){
         const CSSclass = transaction.amount > 0 ? "income" : "expense";
 
         const amount = Utils.formatCurrency(transaction.amount);
@@ -86,7 +88,9 @@ const DOM = {
         `<td class="description">${transaction.description}</td>
             <td class="${CSSclass}">${amount}</td>
             <td class="date">${transaction.date}</td>
-            <td><img src="./assets/minus.svg" alt="Remover alteração" /></td>`
+            <td>
+            <img onClick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover alteração" />
+            </td>`
         return html
     },
 
@@ -105,7 +109,7 @@ const DOM = {
 const Utils = {
     // Formata o valor de string para number e multiplica por 100
     formatAmount(value){
-        value = Number(value) * 100
+        value = Number(value.replace(/\,\./g, "")) * 100
 
         return value
     },
@@ -200,8 +204,8 @@ const Form = {
 
 const App = {
     init(){
-        Transaction.all.forEach(transaction => {
-            DOM.addTransaction(transaction)
+        Transaction.all.forEach((transaction, index) => {
+            DOM.addTransaction(transaction, index)
         })
           DOM.updateBalance()
         
