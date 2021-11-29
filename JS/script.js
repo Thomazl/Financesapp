@@ -101,14 +101,15 @@ const DOM = {
     }
 }
 
-//Format the value in to the currency representation
+//Formata os valores do sistema
 const Utils = {
+    // Formata o valor de string para number e multiplica por 100
     formatAmount(value){
         value = Number(value) * 100
 
         return value
     },
-
+    //Formata a data para o padrão Brasileiro
     formatDate(date){
         const splittedDate = date.split("-")
         
@@ -132,11 +133,12 @@ const Utils = {
 }
 
 const Form = {
+    //Pega os valores do formulário
     description: document.querySelector('input#description'),
     amount: document.querySelector('input#amount'),
     date: document.querySelector('input#date'),
 
-
+    //Pega os valores do formulário e retorna um objeto
     getValues(){
         return {
             description: Form.description.value,
@@ -144,7 +146,7 @@ const Form = {
             date: Form.date.value
         }
     },
-
+    //Valida se os campos estão vazios
     validateFields(){
         const {description, amount, date} = Form.getValues()
         if (description.trim() === '' || amount.trim() === '' || date.trim() === ''){
@@ -152,12 +154,14 @@ const Form = {
         }
     },
 
-
+    //Formata os valores do formulário
     formatValues(){
         let { description, amount, date} = Form.getValues()
+        
         amount = Utils.formatAmount(amount)
 
         date = Utils.formatDate(date)
+    
         return {
             description,
             amount,
@@ -168,14 +172,26 @@ const Form = {
     saveTransaction(transaction){
         Transaction.add(transaction)
     },
+    //Limpa os campos do formulário
+    clearFields(){
+        Form.description.value = ''
+        Form.amount.value = ''
+        Form.date.value = ''
+    },
 
     submit(event){
         event.preventDefault(); 
-        
+        //Tenta achar o erro, se não tiver erro ele continua
         try {
+            Form.validateFields()
+            //Formata os valores do formulário
             const transaction = Form.formatValues()
-
+            //Salva a transação
             Form.saveTransaction(transaction)
+            //Limpa os campos do formulário
+            Form.clearFields()
+            //Fecha o modal
+            Modal.close()
         } catch (error) {
             alert(error.message)
         }
