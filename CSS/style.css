@@ -274,19 +274,18 @@ input{
 }
 
 /* Popup Styles*/
-#ModalPopup{
-    width: 8rem;
-    height: 8rem;
+#alert{
+    width: 15rem;
+    height: 15rem;
     background: var(--color-red-desaproved);
     color: var(--color-white);
-    content: "";
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
-    opacity: 0;
-    visibility: hidden;
+    z-index: 2;
+    opacity: 1;
+    /* visibility: hidden; */
 }
 #ModalPopup.active{
     opacity: 1;

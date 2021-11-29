@@ -164,6 +164,12 @@ const Form = {
 
     saveTransaction(transaction){
         Transaction.add(transaction)
+        swal({
+            title: "Sucesso!",
+            text: "Transação adicionada com sucesso!",
+            icon: "success",
+            button: "OK"
+        })
     },
     //Limpa os campos do formulário
     clearFields(){
@@ -186,7 +192,12 @@ const Form = {
             //Fecha o modal
             Modal.close()
         } catch (error) {
-            alert(error.message)
+            swal({
+                title: "Erro!",
+                text: error.message,
+                icon: "error",
+                button: "OK"
+            })
         }
     }
 }
