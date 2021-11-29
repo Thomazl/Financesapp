@@ -194,6 +194,7 @@ table tbody tr:hover{
 .modal-overlay.active{
     opacity: 1;
     visibility: visible;
+    z-index: 1;
 }
 .modal{
     background: var(--color-white-grey);
@@ -274,13 +275,12 @@ input{
 
 /* Popup Styles*/
 #ModalPopup{
-    width: 100%;
-    height: 30px;
+    width: 8rem;
+    height: 8rem;
     background: var(--color-red-desaproved);
-    position:fixed;
-    top:0;
-    text-align: center;
     color: var(--color-white);
+    content: "";
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;

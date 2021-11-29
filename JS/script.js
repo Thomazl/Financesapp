@@ -1,37 +1,26 @@
 const Modal = {
     open(){
-        //add the class active in the modal to show the modal content
+        //Adiciona a classe 'active' ao modal
         document.querySelector('div.modal-overlay').classList.toggle('active');
         document.querySelector('div.modal').classList.add('slide-in-elliptic-left-fwd');
     },
      close(){
-        //remove the class active in hte modal to desactive modal content
+        //Remove a classe 'active' para esconder o modal
         document.querySelector('div.modal-overlay').classList.toggle('active');
         document.querySelector('div.modal').classList.remove('slide-in-elliptic-left-fwd');
     }   
 } 
-
-const Transaction = {
-    all:[{
-        description: 'Luz',
-        amount: -50000,
-        date:'23/01/2021'
-    }, 
-    {
-        description: 'Website',
-        amount: 50000,
-        date:'23/01/2021'
-    }, 
-    {
-        description: 'Internet',
-        amount: -20000,
-        date:'23/01/2021'
+const Storage = {
+    get(){
+        return JSON.parse(localStorage.getItem('dev.finances:transactions')) || []
     },
-    {
-       description: 'App',
-       amount: 20000,
-       date:'23/01/2021'
-   }],
+
+    set(transactions){
+        localStorage.setItem("dev.finances:transactions", JSON.stringify(transactions))
+    },
+}
+const Transaction = {
+    all:Storage.get(),
 
     add(transaction){
         Transaction.all.push(transaction);
@@ -202,10 +191,13 @@ const Form = {
     }
 }
 
+
 const App = {
     init(){
         Transaction.all.forEach((transaction, index) => {
             DOM.addTransaction(transaction, index)
+
+            Storage.set(Transaction.all)
         })
           DOM.updateBalance()
         
