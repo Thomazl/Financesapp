@@ -1,67 +1,65 @@
 const Modal = {
-    open(){
+    open() {
         //Adiciona a classe 'active' ao modal
         document.querySelector('div.modal-overlay').classList.toggle('active');
         document.querySelector('div.modal').classList.add('slide-in-elliptic-left-fwd');
     },
-     close(){
+    close() {
         //Remove a classe 'active' para esconder o modal
         document.querySelector('div.modal-overlay').classList.toggle('active');
         document.querySelector('div.modal').classList.remove('slide-in-elliptic-left-fwd');
-    }   
-} 
+    }
+}
 const Storage = {
-    get(){
+    get() {
         return JSON.parse(localStorage.getItem('dev.finances:transactions')) || []
     },
 
-    set(transactions){
+    set(transactions) {
         localStorage.setItem("dev.finances:transactions", JSON.stringify(transactions))
     },
 }
 const Transaction = {
-    all:Storage.get(),
+    all: Storage.get(),
 
-    add(transaction){
+    add(transaction) {
         Transaction.all.push(transaction);
 
         App.reload()
     },
-    remove(index){
+    remove(index) {
         swal({
-            title: "Tem certeza?",
-            text: "Você não poderá reverter isso!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-        //Checa se o usuário confirmou a exclusão
-        .then((willDelete) => {
-            if(willDelete){
-                Transaction.all.splice(index, 1);
-            App.reload()
-            swal("Excluído!", {
-                icon: "success"
+                title: "Tem certeza?",
+                text: "Você não poderá reverter isso!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
             })
-            }else{
-                swal("Operação cancelada!")
-            }
-            
-        })
-
+            //Checa se o usuário confirmou a exclusão
+            .then((willDelete) => {
+                if (willDelete) {
+                    Transaction.all.splice(index, 1);
+                    App.reload()
+                    swal("Excluído!", {
+                        icon: "success"
+                    })
+                } else {
+                    swal("Operação cancelada!")
+                }
+            })
     },
 
-    incomes(){
+    incomes() {
         //somar as entradas
         let income = 0;
         Transaction.all.forEach(transaction => {
-            if (transaction.amount > 0){
+            if (transaction.amount > 0) {
                 income += transaction.amount;
             }
         })
         return income
     },
-    expenses(){
+    expenses() {
         //somar as saidas
         let expense = 0;
         Transaction.all.forEach(transaction => {
@@ -71,7 +69,7 @@ const Transaction = {
         })
         return expense
     },
-    total(){
+    total() {
         //Total do valor
         return Transaction.incomes() + Transaction.expenses();
     }
@@ -86,13 +84,13 @@ const DOM = {
 
         DOM.transactionsContainer.appendChild(tr)
     },
-    innerHTMLtransaction(transaction, index){
+    innerHTMLtransaction(transaction, index) {
         const CSSclass = transaction.amount > 0 ? "income" : "expense";
 
         const amount = Utils.formatCurrency(transaction.amount);
-        
-        const html = 
-        `<td class="description">${transaction.description}</td>
+
+        const html =
+            `<td class="description">${transaction.description}</td>
             <td class="${CSSclass}">${amount}</td>
             <td class="date">${transaction.date}</td>
             <td>
@@ -101,13 +99,13 @@ const DOM = {
         return html
     },
 
-    updateBalance(){
+    updateBalance() {
         document.querySelector('p#incomeDisplay').innerHTML = Utils.formatCurrency(Transaction.incomes())
         document.querySelector('p#expenseDisplay').innerHTML = Utils.formatCurrency(Transaction.expenses())
         document.querySelector('p#totalDisplay').innerHTML = Utils.formatCurrency(Transaction.total())
     },
 
-    clearTransactions(){
+    clearTransactions() {
         DOM.transactionsContainer.innerHTML = ''
     }
 }
@@ -115,31 +113,31 @@ const DOM = {
 //Formata os valores do sistema
 const Utils = {
     // Formata o valor de string para number e multiplica por 100
-    formatAmount(value){
+    formatAmount(value) {
         value = Number(value.replace(/\,\./g, "")) * 100
 
         return value
     },
     //Formata a data para o padrão Brasileiro
-    formatDate(date){
+    formatDate(date) {
         const splittedDate = date.split("-")
-        
-        
-        return`${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
+
+
+        return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
     },
 
-    formatCurrency(value){
-       const signal = Number(value) < 0 ? "-" : ""
-       //contra barra "\D" significa pra pegar todos que não forem número e troca para ...
-       value = String(value).replace(/\D/g, "")
+    formatCurrency(value) {
+        const signal = Number(value) < 0 ? "-" : ""
+        //contra barra "\D" significa pra pegar todos que não forem número e troca para ...
+        value = String(value).replace(/\D/g, "")
 
-       value = Number(value) / 100
+        value = Number(value) / 100
 
-       value = value.toLocaleString("pt-BR", {
-       style: "currency",
-       currency:"BRL"
-    })
-    return signal + value
+        value = value.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        })
+        return signal + value
     }
 }
 
@@ -150,7 +148,7 @@ const Form = {
     date: document.querySelector('input#date'),
 
     //Pega os valores do formulário e retorna um objeto
-    getValues(){
+    getValues() {
         return {
             description: Form.description.value,
             amount: Form.amount.value,
@@ -158,21 +156,29 @@ const Form = {
         }
     },
     //Valida se os campos estão vazios
-    validateFields(){
-        const {description, amount, date} = Form.getValues()
-        if (description.trim() === '' || amount.trim() === '' || date.trim() === ''){
+    validateFields() {
+        const {
+            description,
+            amount,
+            date
+        } = Form.getValues()
+        if (description.trim() === '' || amount.trim() === '' || date.trim() === '') {
             throw new Error("Por favor, preencha os campos")
         }
     },
 
     //Formata os valores do formulário
-    formatValues(){
-        let { description, amount, date} = Form.getValues()
-        
+    formatValues() {
+        let {
+            description,
+            amount,
+            date
+        } = Form.getValues()
+
         amount = Utils.formatAmount(amount)
 
         date = Utils.formatDate(date)
-    
+
         return {
             description,
             amount,
@@ -180,7 +186,7 @@ const Form = {
         }
     },
 
-    saveTransaction(transaction){
+    saveTransaction(transaction) {
         Transaction.add(transaction)
         swal({
             title: "Sucesso!",
@@ -190,14 +196,14 @@ const Form = {
         })
     },
     //Limpa os campos do formulário
-    clearFields(){
+    clearFields() {
         Form.description.value = ''
         Form.amount.value = ''
         Form.date.value = ''
     },
 
-    submit(event){
-        event.preventDefault(); 
+    submit(event) {
+        event.preventDefault();
         //Tenta achar o erro, se não tiver erro ele continua
         try {
             Form.validateFields()
@@ -222,17 +228,17 @@ const Form = {
 
 
 const App = {
-    init(){
+    init() {
         Transaction.all.forEach((transaction, index) => {
             DOM.addTransaction(transaction, index)
 
             Storage.set(Transaction.all)
         })
-          DOM.updateBalance()
-        
+        DOM.updateBalance()
+
     },
 
-    reload(){
+    reload() {
         DOM.clearTransactions()
         App.init()
     }
