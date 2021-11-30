@@ -1,3 +1,8 @@
-## Finance site
+## HTML, CSS e JS puro
 
-this site was made by a project on discover from rockeatseat
+Essa aplicação foi criada em base a um projeto da [Rocketseat](https://rocketseat.com.br/).
+Aplicação financeira basica com o objetivo de uma aplicação via web.
+Com entradas e saidas de dinheiro da conta bancaria.
+para organizar o dinheiro e fazer o controle de gastos.
+
+Unica biblioteca a parte usada foi o [swal.js](https://github.com/t4t5/sweetalert) para alertas.
