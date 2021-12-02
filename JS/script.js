@@ -10,11 +10,11 @@ const Modal = {
         document.querySelector('div.modal').classList.remove('slide-in-elliptic-left-fwd');
     }
 }
+//Salva o valor do input no localStorage
 const Storage = {
     get() {
         return JSON.parse(localStorage.getItem('dev.finances:transactions')) || []
     },
-
     set(transactions) {
         localStorage.setItem("dev.finances:transactions", JSON.stringify(transactions))
     },
@@ -34,9 +34,8 @@ const Transaction = {
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
-            })
-            //Checa se o usuário confirmou a exclusão
-            .then((willDelete) => {
+            }).then((willDelete) => {
+                //Checa se o usuário confirmou a exclusão
                 if (willDelete) {
                     Transaction.all.splice(index, 1);
                     App.reload()
@@ -94,7 +93,7 @@ const DOM = {
             <td class="${CSSclass}">${amount}</td>
             <td class="date">${transaction.date}</td>
             <td>
-            <img onClick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover alteração" />
+            <img onClick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover Icon" />
             </td>`
         return html
     },
@@ -155,7 +154,7 @@ const Form = {
             date: Form.date.value
         }
     },
-    //Valida se os campos estão vazios
+    //Valida se os campos não estão vazios
     validateFields() {
         const {
             description,

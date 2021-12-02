@@ -36,7 +36,7 @@ h2 {
     font-weight: 400;
 }
 
-/*Keep visible to SEO, but make invisible to every*/
+/*Mantém visial ao SEO, mas deixa invisivel na tela*/
 .sr-only {
     position: absolute;
     width: 1px;
@@ -60,6 +60,7 @@ header {
 /* Main */
 .container {
     width: min(90vw, 800px);
+    /*Pega 90vw só que no maximo a 800px*/
     margin: 0 auto;
 }
 
