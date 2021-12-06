@@ -11,6 +11,16 @@
     --color-red-desaproved: #e92929;
     --color-green-button-hover: #3dd705;
     --background-modal: rgba(0, 0, 0, .7);
+
+    --background-dark-blue: #090C2D;
+    --dark-blue: #09203F;
+    --light-blue: #537895;
+    --dark-blue-princ: #09203F;
+    --light-blue-princ: #013965;
+    --background-gradient: linear-gradient(to right, #09203F, #013965);
+    --background-gradient-invert: linear-gradient(to right, #013965, #09203F);
+    --background-header: rgba(27, 25, 25, 0.5);
+
 }
 
 * {
@@ -24,7 +34,7 @@ html {
 }
 
 body {
-    background: var(--color-white-grey);
+    background: var(--background-dark-blue);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -51,8 +61,8 @@ h2 {
 
 /* Header */
 header {
-    background: var(--color-dark-green);
-    padding: 2rem 0 10rem;
+    background: var(--background-header);
+    padding: 2rem 0 2rem;
     text-align: center;
 }
 
@@ -66,7 +76,7 @@ header {
 
 /* Balance */
 #balance {
-    margin-top: -4rem;
+    margin-top: 4rem;
 }
 
 #balance h2 {
@@ -76,11 +86,14 @@ header {
 
 /* Cards */
 .card {
-    background: var(--color-white);
+    background: var(--background-gradient);
+    backdrop-filter: blur(4px);
+    box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.34);
+    border-radius: 1.3rem;
     padding: 1.5rem 2rem;
     border-radius: 0.25rem;
     margin-bottom: 2rem;
-    color: var(--color-dark-blue);
+    color: var(--color-white);
 }
 
 .card h3 {
@@ -98,23 +111,38 @@ header {
 }
 
 .card.total {
-    background: var(--color-green);
+    background: var(--background-gradient);
+    box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.34);
     color: var(--color-white);
 }
 
 /* Links & Buttons */
 .button {
     text-decoration: none;
-    color: var(--color-green);
+    color: var(--color-white);
+    background: var(--background-gradient);
 }
 
 .button:hover {
-    color: var(--color-green-button-hover);
+    box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.34);
 }
 
 .button.new {
     display: inline-block;
     margin-bottom: 0.8rem;
+    padding: 0.8rem 1.6rem;
+    background: var(--background-gradient);
+    border-radius: 1rem;
+    opacity: 0.8;
+    transition: 1s;
+}
+.button.new:hover {
+    box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.34);
+    opacity: 1;
+}
+.new img{
+    position: relative;
+    top: 5px;
 }
 
 button {
@@ -132,6 +160,7 @@ button:hover {
 }
 
 .button.cancel {
+    background: transparent;
     color: var(--color-red-desaproved);
     border: 2px var(--color-red-desaproved) solid;
     border-radius: .25rem;
@@ -171,14 +200,14 @@ table tbody tr td:last-child {
 }
 
 table th {
-    background: var(--color-white);
+    background: var(--dark-blue-princ);
     font-weight: normal;
     padding: 1rem 2rem;
     text-align: left;
 }
 
 table td {
-    background: var(--color-white);
+    background: var(--light-blue-princ);
     padding: 1rem 2rem;
 }
 
@@ -191,7 +220,7 @@ table tbody tr:hover {
 }
 
 .description {
-    color: var(--color-dark-blue);
+    color: var(--color-white);
 }
 
 .income {
