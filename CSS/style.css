@@ -252,7 +252,7 @@ table tbody tr:hover {
 }
 
 .modal {
-    background: var(--color-white-grey);
+    background: var(--dark-blue-princ);
     padding: 2.4rem;
     max-width: 500px;
     width: 90%;
