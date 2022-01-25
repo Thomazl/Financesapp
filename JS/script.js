@@ -28,24 +28,25 @@ const Transaction = {
         App.reload()
     },
     remove(index) {
-        swal({
-                title: "Tem certeza?",
-                text: "Você não poderá reverter isso!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            }).then((willDelete) => {
-                //Checa se o usuário confirmou a exclusão
-                if (willDelete) {
-                    Transaction.all.splice(index, 1);
-                    App.reload()
-                    swal("Excluído!", {
-                        icon: "success"
-                    })
-                } else {
-                    swal("Operação cancelada!")
-                }
-            })
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: "Você não poderá reverter isso!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((willDelete) => {
+            if (willDelete.isConfirmed) {
+                Transaction.all.splice(index, 1);
+                App.reload()
+                swal("Excluído!", {
+                    icon: "success"
+                })
+            } else {
+                swal.fire("Operação cancelada!")
+            }
+        })
     },
 
     incomes() {
@@ -187,11 +188,11 @@ const Form = {
 
     saveTransaction(transaction) {
         Transaction.add(transaction)
-        swal({
+        swal.fire({
             title: "Sucesso!",
             text: "Transação adicionada com sucesso!",
             icon: "success",
-            button: "OK"
+            button: "OK",
         })
     },
     //Limpa os campos do formulário
@@ -215,7 +216,7 @@ const Form = {
             //Fecha o modal
             Modal.close()
         } catch (error) {
-            swal({
+            swal.fires({
                 title: "Erro!",
                 text: error.message,
                 icon: "error",
