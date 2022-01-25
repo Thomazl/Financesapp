@@ -6,10 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/style.css">
+    <!-- Loading css -->
+    <link rel="stylesheet" href="CSS/loading.css">
+    
     <title>Finance</title>
 </head>
 
 <body>
+    <!-- Loading screen -->
+    <div class="lds-dual-ring" id="loading"></div>
     <!-- header site -->
     <header>
         <img src="assets/logoipsum.svg" alt="logo Dev eship Finance">
@@ -22,19 +27,19 @@
                 <h3><span>Entradas</span><img src="./assets/income.svg" alt=" Image income" /></h3>
                 <p id="incomeDisplay"></p>
             </div>
-
+            
             <div class="card">
                 <h3><span>Saídas</span><img src="assets/expense.svg" alt="Image expense" /></h3>
                 <p id="expenseDisplay"></p>
             </div>
-
+            
             <div class="card total">
                 <h3><span>Total</span><img src="assets/total.svg" alt="Image total" /></h3>
                 <p id="totalDisplay"></p>
             </div>
-
+            
         </section>
-
+        
         <section id="transaction">
             <h2 class="sr-only">Transações</h2>
             <a href="#" onClick="Modal.open()" class="button new"><img src="assets/plus.svg" alt="plus button" width="20"><span>&nbsp;Nova transação</span></a>
@@ -67,25 +72,26 @@
                         <input type="Number" step="0.01" id="amount" name="amount" placeholder="0,00" />
                         <small class="help">Use o sinal de - (negativo) para despesas e , (vírgula) para casas
                             decimais</small>
-                    </div>
-                    <div class="input-group">
-                        <label class="sr-only" for="date">Data</label>
-                        <input type="date" id="date" name="date" placeholder="01/01/2021" />
-                    </div>
-                    <div class="input-group actions">
-                        <a class="button cancel" onClick="Modal.close()">Cancelar</a>
-                        <button>Salvar</button>
-                    </div>
-                </form>
+                        </div>
+                        <div class="input-group">
+                            <label class="sr-only" for="date">Data</label>
+                            <input type="date" id="date" name="date" placeholder="01/01/2021" />
+                        </div>
+                        <div class="input-group actions">
+                            <a class="button cancel" onClick="Modal.close()">Cancelar</a>
+                            <button>Salvar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- footer site -->
-    <footer>
-        <p>2021-Dev.Finance$ is licensed</p>
-    </footer>
-    <script src="JS/script.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-</body>
-
-</html>
+        <!-- footer site -->
+        <footer>
+            <p>2021-Dev.Finance$ is licensed</p>
+        </footer>
+        <script src="JS/loading.js" type="text/javascript"></script>
+        <script src="JS/script.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    </body>
+    
+    </html>
